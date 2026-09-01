@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roof Shingle Calculator – Estimate Shingle Bundles</title>
+<meta name="description" content="Estimate asphalt shingle bundles from roof area, waste allowance, and bundle coverage for the specific shingle product.">
+<link rel="canonical" href="__SITE_ORIGIN__/roof-shingle-calculator">
+<style>
+:root{
+  --bg:#f6f7f9;--panel:#fff;--text:#18202a;--muted:#667085;--line:#e4e7ec;
+  --accent:#1f5eff;--accent2:#eef4ff;--radius:16px;--shadow:0 10px 30px rgba(16,24,40,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+.wrap{width:min(1040px,calc(100% - 32px));margin:0 auto}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:900;text-decoration:none;letter-spacing:-.03em;color:var(--text)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.hero{padding:52px 0 26px;text-align:center}
+.hero .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--accent2);color:var(--accent);font-size:13px;font-weight:800}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.04;letter-spacing:-.04em;margin:14px 0 12px}
+.hero p{max-width:740px;margin:0 auto;color:var(--muted);font-size:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.tool{padding:26px;margin:18px auto 28px}
+.grid{display:flex;flex-wrap:wrap;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px;flex:1 1 calc(50% - 8px);min-width:240px}
+.field.full{flex-basis:100%}
+label{font-size:14px;font-weight:800}
+input,select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:#fff}
+.help{color:var(--muted);font-size:12px}
+button{border:0;border-radius:12px;background:var(--accent);color:#fff;min-height:50px;padding:0 20px;font:inherit;font-weight:850;cursor:pointer}
+.result{margin-top:20px;padding:18px;border-radius:12px;background:#f9fafb;border:1px solid var(--line)}
+.metric{font-size:32px;font-weight:900;letter-spacing:-.03em}
+.row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:10px 0}
+.content{padding:22px 0 42px}
+.content .card{padding:26px}
+.content h2{font-size:28px;letter-spacing:-.025em;margin:0 0 12px}
+.related{display:flex;gap:12px;flex-wrap:wrap}
+.related a{flex:1 1 210px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:var(--text)}
+.related span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.note{padding:12px 14px;border-radius:10px;background:#fff7ed;color:#92400e;font-size:13px;margin-top:14px}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+@media(max-width:700px){.field{flex-basis:100%;min-width:0}.nav nav{display:none}}
+@media print{.grid{display:block}.field{display:block;width:100%;min-width:0;margin-bottom:14px}.tool{box-shadow:none}.nav nav{display:none}button{width:100%}}
+
+    .site-footer{padding:30px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;background:#fff}
+    .footer-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:var(--muted)}
+    .footer-links a:hover{text-decoration:underline;color:var(--text)}
+
+</style>
+  <meta name="theme-color" content="#1f5eff">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Roofing Calculator">
+  <meta property="og:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roof Shingle Calculator – Estimate Shingle Bundles">
+  <meta name="twitter:description" content="Estimate asphalt shingle bundles from roof area, waste allowance, and bundle coverage for the specific shingle product.">
+  <meta name="twitter:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:alt" content="Roofing Calculator preview">
+
+  <meta property="og:title" content="Roof Shingle Calculator – Estimate Shingle Bundles">
+  <meta property="og:description" content="Estimate asphalt shingle bundles from roof area, waste allowance, and bundle coverage for the specific shingle product.">
+  <meta property="og:url" content="__SITE_ORIGIN__/roof-shingle-calculator">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">Roofing Calculator</a>
+    <nav>
+      <a href="/">Roofing Cost Calculator</a>
+      <a href="#how-it-works">How It Works</a><a href="/methodology">Methodology</a>
+      <a href="#related">Related Tools</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero wrap">
+  <span class="eyebrow">Free roofing tool</span>
+  <h1>Roof Shingle Calculator</h1>
+  <p>Estimate asphalt shingle bundles from roof square footage, waste allowance, and the bundle coverage for your specific shingle product.</p>
+</section>
+<section class="wrap card tool">
+
+<h2>Estimate asphalt shingle bundles</h2>
+<div class="grid">
+  <div class="field">
+    <label for="sqft">Roof area (sq ft)</label>
+    <input id="sqft" type="number" min="0" step="1" placeholder="e.g. 2000">
+  </div>
+  <div class="field">
+    <label for="waste">Waste factor (%)</label>
+    <input id="waste" type="number" min="0" max="50" step=".1" value="10">
+  </div>
+  <div class="field">
+    <label for="bps">Bundles per square</label>
+    <input id="bps" type="number" min="1" step="1" value="3">
+    <span class="help">Verify the package coverage for your exact shingle product before purchasing.</span>
+  </div>
+</div>
+<button id="calc">Calculate Shingle Quantity</button>
+<div class="result">
+  <div class="metric" id="bundles">—</div>
+  <div class="row"><span>Roofing squares incl. waste</span><strong id="squares">—</strong></div>
+  <div class="note">Bundle coverage varies by product. The bundles-per-square field is editable so the calculator does not assume every shingle product is identical.</div>
+</div>
+
+</section>
+<section id="how-it-works" class="wrap content">
+  <div class="card">
+    <h2>How this calculator works</h2>
+    <p>The calculator first converts roof area to roofing squares after the waste percentage, then multiplies by the product-specific number of bundles per square. Always confirm coverage on the manufacturer packaging.</p>
+  </div>
+</section>
+<section id="related" class="wrap content">
+  <h2>Related roofing calculators</h2>
+  <div class="related"><a href="/">Roofing Cost Calculator<span>Estimate roof replacement cost.</span></a>
+<a href="/roof-square-footage-calculator">Roof Square Footage Calculator<span>Estimate roof surface area.</span></a>
+<a href="/roofing-square-calculator">Roofing Square Calculator<span>Convert square feet to roofing squares.</span></a>
+<a href="/metal-roof-cost-calculator">Metal Roof Cost Calculator<span>Plan a metal-roof budget.</span></a></div>
+</section>
+</main>
+<footer class="site-footer"><div class="wrap footer-grid">
+<div><strong>Roofing Calculator</strong><br><span>Free planning tools for U.S. homeowners.</span></div>
+<nav class="footer-links" aria-label="Footer"><a href="/about">About</a><a href="/methodology">Methodology</a><a href="/privacy-policy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></nav>
+</div></footer>
+<script>
+document.getElementById('calc').onclick=()=>{
+ const sqft=Number(document.getElementById('sqft').value||0);
+ const waste=Number(document.getElementById('waste').value||0);
+ const bps=Number(document.getElementById('bps').value||0);
+ const squares=sqft*(1+waste/100)/100;
+ const bundles=Math.ceil(squares*bps);
+ document.getElementById('squares').textContent=sqft?squares.toFixed(2):'—';
+ document.getElementById('bundles').textContent=sqft&&bps?bundles.toLocaleString()+' bundles':'—';
+};</script>
+</body>
+</html>

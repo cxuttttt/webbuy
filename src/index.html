@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roofing Cost Calculator – Estimate Roof Replacement Cost</title>
+  <meta name="description" content="Use this roofing cost calculator to estimate a U.S. roof replacement planning range with published material, labor, and tear-off data.">
+  <link rel="canonical" href="__SITE_ORIGIN__/">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #18202a;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --accent: #1f5eff;
+      --accent-2: #eef4ff;
+      --danger: #b42318;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(16, 24, 40, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--line);
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(10px);
+    }
+    .nav { min-height: 64px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { font-weight: 900; text-decoration:none; letter-spacing:-.03em; font-size:18px; }
+    .brand small { display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-top:-2px; }
+    nav ul { list-style:none; display:flex; gap:20px; padding:0; margin:0; font-size:14px; color:var(--muted); }
+    .hero { padding: 60px 0 28px; text-align:center; }
+    .eyebrow { display:inline-block; padding:6px 10px; background:var(--accent-2); color:var(--accent); border-radius:999px; font-weight:700; font-size:13px; }
+    h1 { margin:16px auto 14px; max-width:820px; font-size:clamp(36px,6vw,64px); line-height:1.02; letter-spacing:-.045em; }
+    .hero p { max-width:760px; margin:0 auto; color:var(--muted); font-size:18px; }
+    .trust { margin-top:18px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap; color:var(--muted); font-size:14px; }
+
+    .calculator-shell { margin: 26px auto 48px; display:flex; gap:24px; align-items:flex-start; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .form-card { padding:26px; flex:1 1 66%; min-width:0; }
+    .result-card { padding:26px; position:sticky; top:88px; flex:0 0 370px; min-width:0; }
+    .section-title { margin:0 0 4px; font-size:22px; letter-spacing:-.02em; }
+    .section-sub { margin:0 0 22px; color:var(--muted); font-size:14px; }
+    .grid { display:flex; flex-wrap:wrap; gap:16px; }
+    .field { display:flex; flex-direction:column; gap:7px; flex:1 1 calc(50% - 8px); min-width:240px; }
+    .field.full { flex-basis:100%; }
+    label { font-size:14px; font-weight:700; }
+    input, select {
+      width:100%; min-height:46px; border:1px solid var(--line); border-radius:10px;
+      padding:10px 12px; font:inherit; background:#fff; color:var(--text);
+    }
+    input:focus, select:focus { outline:2px solid rgba(31,94,255,.16); border-color:var(--accent); }
+    .help { font-size:12px; color:var(--muted); }
+    .toggle-row { margin:18px 0; display:flex; gap:8px; }
+    .toggle-row button {
+      border:1px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:700;
+    }
+    .toggle-row button.active { border-color:var(--accent); background:var(--accent-2); color:var(--accent); }
+    .advanced { display:none; border-top:1px solid var(--line); margin-top:20px; padding-top:20px; }
+    .advanced.show { display:block; }
+    .primary {
+      width:100%; margin-top:22px; border:0; border-radius:12px; min-height:54px;
+      background:var(--accent); color:#fff; font-weight:850; cursor:pointer; font-size:16px;
+      box-shadow:0 8px 20px rgba(31,94,255,.22);
+    }
+    .primary:hover { filter:brightness(.98); }
+
+    .metric-label { color:var(--muted); font-size:13px; }
+    .metric-big { font-size:42px; font-weight:850; letter-spacing:-.04em; margin:3px 0 14px; }
+    .range { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:16px 0 22px; padding:0 4px; }
+    .range > div { border:1px solid var(--line); border-radius:12px; padding:12px 8px; min-width:0; text-align:center; }
+    .range strong { display:block; font-size:17px; font-variant-numeric:tabular-nums; white-space:nowrap; letter-spacing:-.01em; }
+    .breakdown { border-top:1px solid var(--line); padding-top:16px; }
+    .row { display:flex; justify-content:space-between; gap:12px; padding:8px 0; font-size:14px; }
+    .notice { margin-top:16px; padding:12px 14px; border-radius:10px; background:#fff7ed; color:#92400e; font-size:13px; }
+    .methodology, .related, .faq { padding: 18px 0 54px; }
+    .content-card { padding:26px; }
+    .content-card h2 { margin-top:0; font-size:28px; letter-spacing:-.025em; }
+    .steps { display:flex; gap:14px; flex-wrap:wrap; }
+    .step { border:1px solid var(--line); border-radius:12px; padding:18px; background:#fff; flex:1 1 240px; }
+    .step b { display:block; margin-bottom:6px; }
+    .links { display:flex; gap:12px; flex-wrap:wrap; }
+    .tool-link { display:block; padding:16px; border:1px solid var(--line); background:#fff; border-radius:12px; text-decoration:none; flex:1 1 220px; transition:transform .15s ease, border-color .15s ease; }
+    .tool-link:hover { transform:translateY(-2px); border-color:#b8c7ff; }
+    .tool-link span { display:block; color:var(--muted); font-size:13px; margin-top:5px; }
+    details { border-top:1px solid var(--line); padding:14px 0; }
+    summary { font-weight:800; cursor:pointer; }
+    footer { padding:30px 0 44px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
+
+    @media (max-width: 860px) {
+      .calculator-shell { flex-direction:column; }
+      .form-card, .result-card { width:100%; flex-basis:auto; }
+      .result-card { position:static; }
+      nav ul { display:none; }
+    }
+    @media (max-width: 560px) {
+      .field { flex-basis:100%; min-width:0; }
+      .range { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; padding:0; }
+      .range > div { padding:10px 5px; }
+      .range strong { font-size:15px; }
+      .hero { padding-top:40px; }
+      h1 { font-size:40px; }
+      footer .wrap { flex-direction:column; }
+      footer .wrap > div { text-align:left !important; }
+    }
+
+    @media print {
+      header { position: static; }
+      .hero { padding: 28px 0 18px; }
+      .calculator-shell { display:block; }
+      .form-card, .result-card { width:100%; max-width:none; margin-bottom:18px; }
+      .result-card { position:static; }
+      .field { flex-basis:calc(50% - 8px); min-width:0; }
+      .primary { box-shadow:none; }
+      .tool-link:hover { transform:none; }
+    }
+
+  
+    .site-footer{padding:30px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;background:#fff}
+    .footer-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:var(--muted)}
+    .footer-links a:hover{text-decoration:underline;color:var(--text)}
+
+</style>
+  <meta name="theme-color" content="#1f5eff">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Roofing Calculator">
+  <meta property="og:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roofing Cost Calculator – Estimate Roof Replacement Cost">
+  <meta name="twitter:description" content="Use this roofing cost calculator to estimate a U.S. roof replacement planning range with published material, labor, and tear-off data.">
+  <meta name="twitter:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:alt" content="Roofing Calculator preview">
+
+  <meta property="og:title" content="Roofing Cost Calculator – Estimate Roof Replacement Cost">
+  <meta property="og:description" content="Use this roofing cost calculator to estimate a U.S. roof replacement planning range with published material, labor, and tear-off data.">
+  <meta property="og:url" content="__SITE_ORIGIN__/">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Roofing Calculator","url":"__SITE_ORIGIN__/","description":"Free roofing planning calculators for U.S. homeowners."}</script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">Roofing Calculator<small>Homeowner Tools</small></a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#calculator">Cost Calculator</a></li>
+        <li><a href="/methodology">Methodology</a></li>
+        <li><a href="#related">Roofing Tools</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <span class="eyebrow">Free homeowner planning tool</span>
+    <h1>Roofing Cost Calculator</h1>
+    <p>Estimate a U.S. roof replacement planning range using published material, labor, and tear-off cost data. No signup required.</p>
+    <p style="margin:10px auto 0;font-size:13px;color:var(--muted)">Pricing model reviewed September 2026 · <a href="/methodology">View sources and limitations</a></p>
+    <div class="trust">
+      <span>No signup</span>
+      <span>No phone number</span>
+      <span>Transparent assumptions</span>
+      <span>Planning estimate, not a contractor bid</span>
+    </div>
+  </section>
+
+  <div class="wrap" style="margin-top:8px;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;color:var(--muted);font-size:13px;">
+      <span style="padding:7px 10px;background:#fff;border:1px solid var(--line);border-radius:999px;">Low / Typical / High</span>
+      <span style="padding:7px 10px;background:#fff;border:1px solid var(--line);border-radius:999px;">Roofing squares</span>
+      <span style="padding:7px 10px;background:#fff;border:1px solid var(--line);border-radius:999px;">Itemized assumptions</span>
+    </div>
+  </div>
+
+  <section id="calculator" class="wrap calculator-shell" aria-label="Roofing cost calculator">
+    <div class="card form-card">
+      <h2 class="section-title">Project details</h2>
+      <p class="section-sub">Start with the information a homeowner is most likely to know.</p>
+
+      <div class="toggle-row" role="group" aria-label="Calculator mode">
+        <button type="button" class="active" data-mode="easy" aria-pressed="true" aria-controls="advanced-panel">Easy mode</button>
+        <button type="button" data-mode="advanced" aria-pressed="false" aria-controls="advanced-panel">Advanced mode</button>
+      </div>
+
+      <form id="roof-form">
+        <div class="grid">
+          <div class="field">
+            <label for="area">Roof area (sq ft)</label>
+            <input id="area" name="area" type="number" min="1" step="1" placeholder="e.g. 2000" required>
+            <span class="help">Use measured roof area when available. <a href="/roof-square-footage-calculator">Need help estimating roof area?</a></span>
+          </div>
+
+          <div class="field">
+            <label for="material">Roofing material</label>
+            <select id="material" name="material">
+              <option value="asphalt_3tab">Asphalt shingles — 3-tab</option>
+              <option value="asphalt_arch" selected>Asphalt shingles — architectural</option>
+              <option value="metal">Metal roofing — broad range</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="easyWaste">Material waste allowance (%)</label>
+            <input id="easyWaste" type="number" min="0" max="30" step="1" value="10">
+            <span class="help" id="wasteHelp">GAF notes that contractors commonly add about 10–15% for asphalt trim and waste.</span>
+          </div>
+
+          <div class="field full">
+            <label for="tearoff">Existing roof</label>
+            <select id="tearoff" name="tearoff">
+              <option value="yes">Remove existing roof</option>
+              <option value="no">No tear-off / new construction</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="advanced" id="advanced-panel">
+          <h3>Advanced assumptions</h3>
+          <p class="section-sub">Enter your own local installed-cost range. Advanced Mode uses only the rates you provide.</p>
+          <div class="grid">
+            <div class="field">
+              <label for="rateLow">Low installed rate ($ / sq ft)</label>
+              <input id="rateLow" type="number" min="0" step=".01" placeholder="Enter your verified rate">
+            </div>
+            <div class="field">
+              <label for="rateMid">Typical installed rate ($ / sq ft)</label>
+              <input id="rateMid" type="number" min="0" step=".01" placeholder="Enter your verified rate">
+            </div>
+            <div class="field">
+              <label for="rateHigh">High installed rate ($ / sq ft)</label>
+              <input id="rateHigh" type="number" min="0" step=".01" placeholder="Enter your verified rate">
+            </div>
+            <div class="field">
+              <label for="waste">Waste factor (%)</label>
+              <input id="waste" type="number" min="0" max="50" step=".1" placeholder="Optional">
+            </div>
+          </div>
+        </div>
+
+        <button class="primary" type="submit">Calculate My Roof Estimate</button>
+      </form>
+    </div>
+
+    <aside class="card result-card" aria-live="polite">
+      <span class="metric-label">Estimated project cost</span>
+      <div class="metric-big" id="mid-cost">—</div>
+
+      <div class="range">
+        <div><span class="metric-label">Low</span><strong id="low-cost">—</strong></div>
+        <div><span class="metric-label">Typical</span><strong id="typical-cost">—</strong></div>
+        <div><span class="metric-label">High</span><strong id="high-cost">—</strong></div>
+      </div>
+
+      <div class="breakdown">
+        <div class="row"><span>Roof area</span><strong id="out-area">—</strong></div>
+        <div class="row"><span>Roofing squares incl. waste</span><strong id="out-squares">—</strong></div>
+        <div class="row"><span>Material area incl. waste</span><strong id="out-waste-area">—</strong></div>
+        <div class="row"><span>Material</span><strong id="out-material-cost">—</strong></div>
+        <div class="row"><span>Installation labor</span><strong id="out-labor-cost">—</strong></div>
+        <div class="row"><span>Tear-off</span><strong id="out-tearoff-cost">—</strong></div>
+      </div>
+
+      <div class="notice" id="notice">
+        National U.S. planning estimate. Local bids may differ because of location, roof access, pitch, height, complexity, permits, decking repairs, and hidden damage. <a href="/methodology">See methodology and sources.</a>
+      </div>
+    </aside>
+  </section>
+
+  <section id="methodology" class="wrap methodology">
+    <div class="card content-card">
+      <h2>How this roofing calculator works</h2>
+      <div class="steps">
+        <div class="step"><b>1. Measure</b><span>Convert roof area into roofing squares and apply a clearly disclosed waste assumption.</span></div>
+        <div class="step"><b>2. Adjust</b><span>The estimate includes published material, installation-labor, tear-off, and asphalt-waste assumptions.</span></div>
+        <div class="step"><b>3. Show a range</b><span>Present low, typical and high planning estimates instead of implying one exact price.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="related" class="wrap related">
+    <h2>Related roofing calculators</h2>
+    <div class="links">
+      <a class="tool-link" href="/roof-square-footage-calculator">Roof Square Footage Calculator<span>Estimate roof surface area.</span></a>
+      <a class="tool-link" href="/roofing-square-calculator">Roofing Square Calculator<span>Convert square feet to roofing squares.</span></a>
+      <a class="tool-link" href="/roof-shingle-calculator">Roof Shingle Calculator<span>Estimate shingle quantities.</span></a>
+      <a class="tool-link" href="/metal-roof-cost-calculator">Metal Roof Cost Calculator<span>Plan a metal-roof budget.</span></a>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap faq">
+    <div class="card content-card">
+      <h2>Roofing cost calculator FAQ</h2>
+      <details>
+        <summary>Is this a contractor quote?</summary>
+        <p>No. It is a planning calculator. A site inspection and written contractor proposal are still required for a binding price.</p>
+      </details>
+      <details>
+        <summary>What is a roofing square?</summary>
+        <p>A roofing square equals 100 square feet of roof area. Our Methodology page cites the GAF source used for this definition.</p>
+      </details>
+      <details>
+        <summary>Why does the calculator show a range?</summary>
+        <p>Actual roofing bids vary by labor market, material, roof access, pitch, tear-off scope, permit requirements and project complexity.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap footer-grid">
+<div><strong>Roofing Calculator</strong><br><span>Free planning tools for U.S. homeowners.</span></div>
+<nav class="footer-links" aria-label="Footer"><a href="/about">About</a><a href="/methodology">Methodology</a><a href="/privacy-policy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></nav>
+</div></footer>
+
+<script>
+  const COST = {
+    asphalt_3tab: {materialLow:.80, materialHigh:1.30, laborLow:2.00, laborHigh:3.00, tearLow:1.00, tearHigh:3.00, waste:10},
+    asphalt_arch: {materialLow:1.00, materialHigh:2.50, laborLow:3.00, laborHigh:3.50, tearLow:1.00, tearHigh:3.00, waste:10},
+    metal: {materialLow:1.00, materialHigh:8.00, laborLow:4.00, laborHigh:8.00, tearLow:1.00, tearHigh:3.00, waste:0}
+  };
+
+  const modeButtons = document.querySelectorAll('[data-mode]');
+  const advancedPanel = document.getElementById('advanced-panel');
+  const materialSelect = document.getElementById('material');
+  const easyWaste = document.getElementById('easyWaste');
+  const wasteHelp = document.getElementById('wasteHelp');
+  const notice = document.getElementById('notice');
+  let mode = 'easy';
+
+  function setMode(nextMode) {
+    mode = nextMode;
+    modeButtons.forEach(btn => {
+      const active = btn.dataset.mode === mode;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    advancedPanel.classList.toggle('show', mode === 'advanced');
+  }
+
+  modeButtons.forEach(btn => {
+    btn.setAttribute('aria-pressed', btn.dataset.mode === 'easy' ? 'true' : 'false');
+    btn.addEventListener('click', () => setMode(btn.dataset.mode));
+  });
+
+  materialSelect.addEventListener('change', () => {
+    const cfg = COST[materialSelect.value];
+    easyWaste.value = cfg.waste;
+    wasteHelp.textContent = materialSelect.value === 'metal'
+      ? 'No automatic metal waste allowance is added. Enter the allowance you want to use for your project.'
+      : 'GAF notes that contractors commonly add about 10–15% for asphalt trim and waste.';
+  });
+
+  const money = value => new Intl.NumberFormat('en-US', {
+    style:'currency', currency:'USD', maximumFractionDigits:0
+  }).format(value);
+
+  function clearCosts() {
+    ['low-cost','typical-cost','high-cost','mid-cost'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+    ['out-material-cost','out-labor-cost','out-tearoff-cost'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+  }
+
+  function setCostOutputs(low, mid, high, matText, laborText, tearText) {
+    document.getElementById('low-cost').textContent = money(low);
+    document.getElementById('typical-cost').textContent = money(mid);
+    document.getElementById('high-cost').textContent = money(high);
+    document.getElementById('mid-cost').textContent = money(mid);
+    document.getElementById('out-material-cost').textContent = matText;
+    document.getElementById('out-labor-cost').textContent = laborText;
+    document.getElementById('out-tearoff-cost').textContent = tearText;
+  }
+
+  document.getElementById('roof-form').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const areaInput = document.getElementById('area');
+    const area = Number(areaInput.value || 0);
+    if (!Number.isFinite(area) || area <= 0) {
+      clearCosts();
+      notice.textContent = 'Enter a roof area greater than 0 square feet to calculate an estimate.';
+      areaInput.focus();
+      return;
+    }
+
+    const wasteInput = mode === 'advanced' ? document.getElementById('waste') : easyWaste;
+    const wastePct = Number(wasteInput.value || 0);
+    if (!Number.isFinite(wastePct) || wastePct < 0 || wastePct > 50) {
+      clearCosts();
+      notice.textContent = 'Enter a waste allowance between 0% and 50%.';
+      wasteInput.focus();
+      return;
+    }
+
+    const adjustedArea = area * (1 + wastePct / 100);
+    const squares = adjustedArea / 100;
+
+    document.getElementById('out-area').textContent = `${Math.round(area).toLocaleString()} sq ft`;
+    document.getElementById('out-squares').textContent = squares.toFixed(2);
+    document.getElementById('out-waste-area').textContent = `${Math.round(adjustedArea).toLocaleString()} sq ft`;
+
+    if (mode === 'advanced') {
+      const low = Number(document.getElementById('rateLow').value || 0);
+      const mid = Number(document.getElementById('rateMid').value || 0);
+      const high = Number(document.getElementById('rateHigh').value || 0);
+
+      if (!(low > 0 && mid > 0 && high > 0)) {
+        clearCosts();
+        notice.textContent = 'Enter all three installed rates to calculate an Advanced Mode estimate.';
+        return;
+      }
+      if (!(low <= mid && mid <= high)) {
+        clearCosts();
+        notice.textContent = 'Use rates in ascending order: Low ≤ Typical ≤ High.';
+        return;
+      }
+
+      setCostOutputs(
+        adjustedArea * low,
+        adjustedArea * mid,
+        adjustedArea * high,
+        'Included in your rate',
+        'Included in your rate',
+        'Included in your rate'
+      );
+      notice.innerHTML = 'Advanced Mode uses only the installed rates and waste allowance you entered. <a href="/methodology">See planning limitations.</a>';
+      return;
+    }
+
+    const cfg = COST[materialSelect.value];
+    const tear = document.getElementById('tearoff').value === 'yes';
+
+    const matLow = adjustedArea * cfg.materialLow;
+    const matHigh = adjustedArea * cfg.materialHigh;
+    const laborLow = area * cfg.laborLow;
+    const laborHigh = area * cfg.laborHigh;
+    const tearLow = tear ? area * cfg.tearLow : 0;
+    const tearHigh = tear ? area * cfg.tearHigh : 0;
+
+    const low = matLow + laborLow + tearLow;
+    const high = matHigh + laborHigh + tearHigh;
+    const mid = (low + high) / 2;
+
+    setCostOutputs(
+      low, mid, high,
+      `${money(matLow)}–${money(matHigh)}`,
+      `${money(laborLow)}–${money(laborHigh)}`,
+      tear ? `${money(tearLow)}–${money(tearHigh)}` : '$0'
+    );
+
+    notice.innerHTML = 'National U.S. planning estimate. Local bids may differ because of location, roof access, pitch, height, complexity, permits, decking repairs, and hidden damage. <a href="/methodology">See methodology and sources.</a>';
+  });
+</script>
+</body>
+</html>

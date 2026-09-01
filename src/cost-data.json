@@ -1,0 +1,77 @@
+{
+  "version": "2026-09-01",
+  "scope": "U.S. national planning ranges",
+  "sources": {
+    "homeguide_roof_replacement": {
+      "name": "HomeGuide \u2014 Roof Replacement Cost (2026)",
+      "url": "https://homeguide.com/costs/roof-replacement-cost",
+      "notes": [
+        "Asphalt shingle material: $80\u2013$250 per roofing square depending on type.",
+        "Metal material: $100\u2013$800 per roofing square.",
+        "Roofing square = 100 sq ft."
+      ]
+    },
+    "homeguide_labor": {
+      "name": "HomeGuide \u2014 Roofing Labor Cost Per Square (2026)",
+      "url": "https://homeguide.com/costs/roofing-labor-cost",
+      "notes": [
+        "3-tab asphalt labor: $2.00\u2013$3.00 per sq ft (material-specific table).",
+        "Architectural asphalt labor: $3.00\u2013$3.50 per sq ft (material-specific table).",
+        "Metal labor: $4.00\u2013$8.00 per sq ft.",
+        "Shingle/metal tear-off: $1.00\u2013$3.00 per sq ft."
+      ]
+    },
+    "gaf_bundles": {
+      "name": "GAF \u2014 How Many Bundles of Shingles Are in a Square? (2026)",
+      "url": "https://www.gaf.com/en-us/blog/your-home/how-many-bundles-of-shingles-are-in-a-square---63a47862-f7e1-4e73-abcf-8d09917a8b8d",
+      "notes": [
+        "1 roofing square = 100 sq ft.",
+        "Most standard asphalt shingles use 3 bundles per square.",
+        "GAF recommends adding roughly 10\u201315% for trim allowance and waste."
+      ]
+    },
+    "bls_roofers": {
+      "name": "U.S. Bureau of Labor Statistics \u2014 May 2025 Roofers",
+      "url": "https://www.bls.gov/news.release/ocwage.t01.htm",
+      "notes": [
+        "National roofer mean hourly wage: $27.95.",
+        "National roofer median hourly wage: $26.65."
+      ]
+    }
+  },
+  "easy_mode": {
+    "asphalt_3tab": {
+      "label": "Asphalt shingles \u2014 3-tab",
+      "material_low": 0.8,
+      "material_high": 1.3,
+      "labor_low": 2.0,
+      "labor_high": 3.0,
+      "tearoff_low": 1.0,
+      "tearoff_high": 3.0,
+      "default_waste_pct": 10,
+      "source_note": "Material + shingle labor + optional shingle tear-off."
+    },
+    "asphalt_arch": {
+      "label": "Asphalt shingles \u2014 architectural",
+      "material_low": 1.0,
+      "material_high": 2.5,
+      "labor_low": 3.0,
+      "labor_high": 3.5,
+      "tearoff_low": 1.0,
+      "tearoff_high": 3.0,
+      "default_waste_pct": 10,
+      "source_note": "Material + shingle labor + optional shingle tear-off."
+    },
+    "metal": {
+      "label": "Metal roofing \u2014 broad national range",
+      "material_low": 1.0,
+      "material_high": 8.0,
+      "labor_low": 4.0,
+      "labor_high": 8.0,
+      "tearoff_low": 1.0,
+      "tearoff_high": 3.0,
+      "default_waste_pct": 0,
+      "source_note": "Broad metal material + metal labor + optional metal tear-off."
+    }
+  }
+}

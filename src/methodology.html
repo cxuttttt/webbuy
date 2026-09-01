@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roofing Cost Calculator Methodology &amp; Data Sources</title>
+<link rel="canonical" href="__SITE_ORIGIN__/methodology">
+<meta name="description" content="See the formulas, public data sources, assumptions, and limitations behind the U.S. roofing cost calculator.">
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--text:#18202a;--muted:#667085;--line:#e4e7ec;--accent:#1f5eff;--accent2:#eef4ff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);line-height:1.65}
+.wrap{width:min(920px,calc(100% - 32px));margin:auto}header{background:#fff;border-bottom:1px solid var(--line)}
+.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;text-decoration:none;color:var(--text)}
+main{padding:48px 0}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:18px}
+h1{font-size:44px;line-height:1.05;letter-spacing:-.04em;margin:0 0 12px}h2{margin-top:0}p,li{color:#344054}
+code{background:#f2f4f7;padding:2px 6px;border-radius:6px}.source{padding:14px 0;border-top:1px solid var(--line)}
+.source a{color:var(--accent)}.pill{display:inline-block;background:var(--accent2);color:var(--accent);font-weight:800;font-size:13px;padding:6px 10px;border-radius:999px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+.note{background:#fff7ed;color:#92400e;padding:12px 14px;border-radius:10px}
+footer{padding:28px 0 40px;color:var(--muted);border-top:1px solid var(--line)}
+
+    .site-footer{padding:30px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;background:#fff}
+    .footer-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:var(--muted)}
+    .footer-links a:hover{text-decoration:underline;color:var(--text)}
+
+</style>
+  <meta name="theme-color" content="#1f5eff">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Roofing Calculator">
+  <meta property="og:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roofing Cost Calculator Methodology &amp;amp; Data Sources">
+  <meta name="twitter:description" content="See the formulas, public data sources, assumptions, and limitations behind the U.S. roofing cost calculator.">
+  <meta name="twitter:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:alt" content="Roofing Calculator preview">
+
+  <meta property="og:title" content="Roofing Cost Calculator Methodology &amp; Data Sources">
+  <meta property="og:description" content="See the formulas, public data sources, assumptions, and limitations behind the U.S. roofing cost calculator.">
+  <meta property="og:url" content="__SITE_ORIGIN__/methodology">
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="/">Roofing Calculator</a><a href="/">Back to calculator</a></div></header>
+<main class="wrap">
+<span class="pill">Updated September 2026</span>
+<h1>How the roofing cost estimate is calculated</h1>
+<p>This calculator is a planning tool, not a contractor quote. It uses national U.S. component ranges and does not claim to know a ZIP-code-specific contractor bid.</p>
+
+<div class="card">
+<h2>Formula</h2>
+<p>For supported materials, the calculator separates material, installation labor, and optional tear-off:</p>
+<p><code>material cost = roof area × (1 + waste %) × material rate</code></p>
+<p><code>labor cost = roof area × labor rate</code></p>
+<p><code>tear-off cost = roof area × tear-off rate</code> (only when selected)</p>
+<p><code>total = material + labor + tear-off</code></p>
+<p>The “Typical” number is the midpoint of the calculated Low and High planning totals. It is not claimed to be a market quote.</p>
+</div>
+
+<div class="card">
+<h2>Published rates used by Easy Mode</h2>
+<table>
+<thead><tr><th>Material</th><th>Material</th><th>Labor</th><th>Tear-off</th><th>Waste default</th></tr></thead>
+<tbody>
+<tr><td>3-tab asphalt</td><td>$0.80–$1.30/sq ft</td><td>$2.00–$3.00/sq ft</td><td>$1–$3/sq ft</td><td>10%</td></tr>
+<tr><td>Architectural asphalt</td><td>$1.00–$2.50/sq ft</td><td>$3.00–$3.50/sq ft</td><td>$1–$3/sq ft</td><td>10%</td></tr>
+<tr><td>Metal (broad)</td><td>$1.00–$8.00/sq ft</td><td>$4.00–$8.00/sq ft</td><td>$1–$3/sq ft</td><td>0%</td></tr>
+</tbody>
+</table>
+<p class="note">The national estimate does not add separate adjustments for location, roof pitch, story height, permits, decking repairs, gutters, skylights, or hidden structural damage. Local contractor quotes are the best source for project-specific factors.</p>
+</div>
+
+<div class="card">
+<h2>Sources</h2>
+<div class="source"><strong>HomeGuide — Roof Replacement Cost (2026)</strong><br>
+Material-price ranges and roofing-square data.<br>
+<a href="https://homeguide.com/costs/roof-replacement-cost" rel="nofollow noopener">View source</a></div>
+<div class="source"><strong>HomeGuide — Roofing Labor Cost Per Square (2026)</strong><br>
+Material-specific shingle labor, metal labor, and tear-off ranges.<br>
+<a href="https://homeguide.com/costs/roofing-labor-cost" rel="nofollow noopener">View source</a></div>
+<div class="source"><strong>GAF — Roofing squares, bundles, and waste (Aug. 24, 2026)</strong><br>
+GAF states that one roofing square equals 100 sq ft, most standard asphalt shingles use three bundles per square, and a 10–15% trim/waste allowance is commonly added.<br>
+<a href="https://www.gaf.com/en-us/blog/your-home/how-many-bundles-of-shingles-are-in-a-square---63a47862-f7e1-4e73-abcf-8d09917a8b8d" rel="nofollow noopener">View source</a></div>
+<div class="source"><strong>U.S. Bureau of Labor Statistics — May 2025 OEWS</strong><br>
+National roofer mean hourly wage $27.95; median hourly wage $26.65. The calculator does not convert this wage directly into a contractor billing rate.<br>
+<a href="https://www.bls.gov/news.release/ocwage.t01.htm" rel="nofollow noopener">View source</a></div>
+</div>
+
+<div class="card">
+<h2>What the estimate does not know</h2>
+<ul>
+<li>Your contractor’s overhead, profit, insurance, crew productivity, or scheduling constraints.</li>
+<li>Local permit fees, code upgrades, ice/water shield requirements, or disposal rules.</li>
+<li>Decking damage hidden under the existing roof.</li>
+<li>Exact valley, dormer, chimney, skylight, flashing, and access complexity.</li>
+<li>A state-by-state price multiplier. The calculator uses national ranges rather than claiming a local adjustment without a documented source.</li>
+</ul>
+<p>For a purchase decision, compare multiple written contractor bids and confirm exactly what each bid includes.</p>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-grid">
+<div><strong>Roofing Calculator</strong><br><span>Free planning tools for U.S. homeowners.</span></div>
+<nav class="footer-links" aria-label="Footer"><a href="/about">About</a><a href="/methodology">Methodology</a><a href="/privacy-policy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></nav>
+</div></footer>
+</body></html>

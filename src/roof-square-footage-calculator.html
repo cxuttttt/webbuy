@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roof Square Footage Calculator – Estimate Roof Area</title>
+<meta name="description" content="Calculate roof square footage from measured area or a simple footprint and roof pitch, then convert the result to roofing squares.">
+<link rel="canonical" href="__SITE_ORIGIN__/roof-square-footage-calculator">
+<style>
+:root{
+  --bg:#f6f7f9;--panel:#fff;--text:#18202a;--muted:#667085;--line:#e4e7ec;
+  --accent:#1f5eff;--accent2:#eef4ff;--radius:16px;--shadow:0 10px 30px rgba(16,24,40,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+.wrap{width:min(1040px,calc(100% - 32px));margin:0 auto}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:900;text-decoration:none;letter-spacing:-.03em;color:var(--text)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.hero{padding:52px 0 26px;text-align:center}
+.hero .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--accent2);color:var(--accent);font-size:13px;font-weight:800}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.04;letter-spacing:-.04em;margin:14px 0 12px}
+.hero p{max-width:740px;margin:0 auto;color:var(--muted);font-size:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.tool{padding:26px;margin:18px auto 28px}
+.grid{display:flex;flex-wrap:wrap;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px;flex:1 1 calc(50% - 8px);min-width:240px}
+.field.full{flex-basis:100%}
+label{font-size:14px;font-weight:800}
+input,select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:#fff}
+.help{color:var(--muted);font-size:12px}
+button{border:0;border-radius:12px;background:var(--accent);color:#fff;min-height:50px;padding:0 20px;font:inherit;font-weight:850;cursor:pointer}
+.result{margin-top:20px;padding:18px;border-radius:12px;background:#f9fafb;border:1px solid var(--line)}
+.metric{font-size:32px;font-weight:900;letter-spacing:-.03em}
+.row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:10px 0}
+.content{padding:22px 0 42px}
+.content .card{padding:26px}
+.content h2{font-size:28px;letter-spacing:-.025em;margin:0 0 12px}
+.related{display:flex;gap:12px;flex-wrap:wrap}
+.related a{flex:1 1 210px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:var(--text)}
+.related span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.note{padding:12px 14px;border-radius:10px;background:#fff7ed;color:#92400e;font-size:13px;margin-top:14px}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+@media(max-width:700px){.field{flex-basis:100%;min-width:0}.nav nav{display:none}}
+@media print{.grid{display:block}.field{display:block;width:100%;min-width:0;margin-bottom:14px}.tool{box-shadow:none}.nav nav{display:none}button{width:100%}}
+
+    .site-footer{padding:30px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;background:#fff}
+    .footer-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:var(--muted)}
+    .footer-links a:hover{text-decoration:underline;color:var(--text)}
+
+</style>
+  <meta name="theme-color" content="#1f5eff">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Roofing Calculator">
+  <meta property="og:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Roof Square Footage Calculator – Estimate Roof Area">
+  <meta name="twitter:description" content="Calculate roof square footage from measured area or a simple footprint and roof pitch, then convert the result to roofing squares.">
+  <meta name="twitter:image" content="__SITE_ORIGIN__/og-image.png">
+  <meta property="og:image:alt" content="Roofing Calculator preview">
+
+  <meta property="og:title" content="Roof Square Footage Calculator – Estimate Roof Area">
+  <meta property="og:description" content="Calculate roof square footage from measured area or a simple footprint and roof pitch, then convert the result to roofing squares.">
+  <meta property="og:url" content="__SITE_ORIGIN__/roof-square-footage-calculator">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">Roofing Calculator</a>
+    <nav>
+      <a href="/">Roofing Cost Calculator</a>
+      <a href="#how-it-works">How It Works</a><a href="/methodology">Methodology</a>
+      <a href="#related">Related Tools</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero wrap">
+  <span class="eyebrow">Free roofing tool</span>
+  <h1>Roof Square Footage Calculator</h1>
+  <p>Calculate roof square footage from measured area or a simple footprint and roof pitch, then convert the result to roofing squares.</p>
+</section>
+<section class="wrap card tool">
+
+<h2>Project measurements</h2>
+<p class="help">Enter measured roof area directly, or estimate sloped area from a rectangular footprint and pitch.</p>
+<div class="grid">
+  <div class="field">
+    <label for="mode">Input method</label>
+    <select id="mode">
+      <option value="direct">I know roof area</option>
+      <option value="footprint">Estimate from footprint + pitch</option>
+    </select>
+  </div>
+  <div class="field direct">
+    <label for="directArea">Measured roof area (sq ft)</label>
+    <input id="directArea" type="number" min="0" step="1" placeholder="e.g. 2200">
+  </div>
+  <div class="field fp" style="display:none">
+    <label for="length">Building length (ft)</label>
+    <input id="length" type="number" min="0" step=".1">
+  </div>
+  <div class="field fp" style="display:none">
+    <label for="width">Building width (ft)</label>
+    <input id="width" type="number" min="0" step=".1">
+  </div>
+  <div class="field fp" style="display:none">
+    <label for="rise">Roof rise</label>
+    <input id="rise" type="number" min="0" step=".1" placeholder="e.g. 6">
+  </div>
+  <div class="field fp" style="display:none">
+    <label for="run">Roof run</label>
+    <input id="run" type="number" min="0.1" step=".1" value="12">
+    <span class="help">For a 6:12 roof, rise = 6 and run = 12.</span>
+  </div>
+</div>
+<button id="calc">Calculate Roof Area</button>
+<div class="result">
+  <div class="metric" id="result">—</div>
+  <div class="row"><span>Roofing squares</span><strong id="squares">—</strong></div>
+  <div class="note">This is a geometry estimate. Complex hips, valleys, dormers and overhangs can require plane-by-plane measurement.</div>
+</div>
+
+</section>
+<section id="how-it-works" class="wrap content">
+  <div class="card">
+    <h2>How this calculator works</h2>
+    <p>If you know the measured roof surface area, the calculator uses that value directly. For a simple rectangular footprint, it can estimate sloped area by multiplying footprint area by the slope factor derived from the rise/run triangle.</p><p>For irregular roofs, plane-by-plane measurement is more reliable.</p>
+  </div>
+</section>
+<section id="related" class="wrap content">
+  <h2>Related roofing calculators</h2>
+  <div class="related"><a href="/">Roofing Cost Calculator<span>Estimate roof replacement cost.</span></a>
+<a href="/roofing-square-calculator">Roofing Square Calculator<span>Convert square feet to roofing squares.</span></a>
+<a href="/roof-shingle-calculator">Roof Shingle Calculator<span>Estimate asphalt-shingle quantity.</span></a>
+<a href="/metal-roof-cost-calculator">Metal Roof Cost Calculator<span>Plan a metal-roof budget.</span></a></div>
+</section>
+</main>
+<footer class="site-footer"><div class="wrap footer-grid">
+<div><strong>Roofing Calculator</strong><br><span>Free planning tools for U.S. homeowners.</span></div>
+<nav class="footer-links" aria-label="Footer"><a href="/about">About</a><a href="/methodology">Methodology</a><a href="/privacy-policy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></nav>
+</div></footer>
+<script>
+const mode=document.getElementById('mode');
+mode.onchange=()=>{document.querySelectorAll('.fp').forEach(x=>x.style.display=mode.value==='footprint'?'flex':'none');document.querySelector('.direct').style.display=mode.value==='direct'?'flex':'none'};
+document.getElementById('calc').onclick=()=>{
+ let area=0;
+ if(mode.value==='direct') area=Number(document.getElementById('directArea').value||0);
+ else{
+   const l=Number(document.getElementById('length').value||0), w=Number(document.getElementById('width').value||0);
+   const rise=Number(document.getElementById('rise').value||0), run=Number(document.getElementById('run').value||12);
+   const factor=Math.sqrt(rise*rise+run*run)/run;
+   area=l*w*factor;
+ }
+ document.getElementById('result').textContent=area?Math.round(area).toLocaleString()+' sq ft':'—';
+ document.getElementById('squares').textContent=area?(area/100).toFixed(2):'—';
+};</script>
+</body>
+</html>
